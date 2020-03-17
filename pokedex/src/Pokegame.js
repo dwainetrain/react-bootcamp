@@ -16,14 +16,11 @@ class Pokegame extends React.Component {
   ]
 }
 
-  handGenerator = (array) => {
+handGenerator = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
   
       // swap elements array[i] and array[j]
-      // we use "destructuring assignment" syntax to achieve that
-      // you'll find more details about that syntax in later chapters
-      // same can be written as:
       // let t = array[i]; array[i] = array[j]; array[j] = t
       [array[i], array[j]] = [array[j], array[i]];
     }
@@ -35,14 +32,39 @@ class Pokegame extends React.Component {
     return [firstHand, secondHand];
   }
 
+  expCalc = (array) => {
+    return array.reduce((item, sum) => item + sum.base_experience, 0)
+  }
+
+  findWinner = (playerOneScore, playerTwoScore) => {
+      if (playerOneScore > playerTwoScore) {
+        return 1
+      } else if ( playerTwoScore > playerOneScore) {
+        return 2
+      } else {
+        return 0
+      }
+  }
+
   render() {
+    // Get two random hands
     let [hand1, hand2] = this.handGenerator(this.props.pokemon);
+    // Calculate the score for each hand
+    let handOneXp = this.expCalc(hand1)
+    let handTwoXp = this.expCalc(hand2)
+    // Get the winner based on score
+    let winningPlayer = this.findWinner(handOneXp, handTwoXp)
+    
     return (
       <div>
       <h1>Player 1:</h1>
       <Pokedeck cards={hand1} />
+      <p>Total Points: {handOneXp}</p>
+      <p>{winningPlayer===0 ? "Tie!" : (winningPlayer===1 ? "Winner!" : "Loser!")}</p>
       <h1>Player 2:</h1>
       <Pokedeck cards={hand2} />
+      <p>Total Points: {handTwoXp}</p>
+      <p>{winningPlayer===0 ? "Tie!" : (winningPlayer===2 ? "Winner!" : "Loser!")}</p>
       </div>
     )
     
