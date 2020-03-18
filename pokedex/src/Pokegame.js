@@ -16,6 +16,7 @@ class Pokegame extends React.Component {
   ]
 }
 
+// Shuffle data array to get a new set of random cards each time
 handGenerator = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
@@ -32,10 +33,12 @@ handGenerator = (array) => {
     return [firstHand, secondHand];
   }
 
+  // Calculate total experience for the hand
   expCalc = (array) => {
     return array.reduce((item, sum) => item + sum.base_experience, 0)
   }
 
+  // Test win conditions
   findWinner = (playerOneScore, playerTwoScore) => {
       if (playerOneScore > playerTwoScore) {
         return 1
