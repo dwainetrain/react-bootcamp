@@ -24,6 +24,7 @@ class Dice extends React.Component {
       buttonDisabled: true,
       message: "Rollin'!"
     });
+    // When it times out, this change state back...
     setTimeout(() => {
       this.setState({
         dieClass: "still",
