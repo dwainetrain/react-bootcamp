@@ -1,11 +1,11 @@
 import React from "react";
-import Button from "./Button";
+import Dice from "./Dice";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <Button />
+      <Dice />
     </div>
   );
 }
