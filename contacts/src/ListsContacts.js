@@ -16,7 +16,12 @@ class ListContacts extends React.Component {
               <p>{contact.name}</p>
               <p>{contact.email}</p>
             </div>
-            <div className="contact-remove"></div>
+            <button
+              onClick={() => this.props.onDeleteContact(contact)}
+              className="contact-remove"
+            >
+              Remove
+            </button>
           </li>
         ))}
       </ol>
